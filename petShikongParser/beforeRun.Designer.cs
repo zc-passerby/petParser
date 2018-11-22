@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(beforeRun));
             this.tbSetDir = new System.Windows.Forms.TextBox();
             this.btnSetDir = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -56,6 +57,10 @@
             this.ClientSize = new System.Drawing.Size(412, 45);
             this.Controls.Add(this.btnSetDir);
             this.Controls.Add(this.tbSetDir);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "beforeRun";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "超哥辅助";

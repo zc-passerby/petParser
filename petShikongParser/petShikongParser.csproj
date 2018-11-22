@@ -106,6 +106,12 @@
     <Compile Include="Data\道具具体信息.cs" />
     <Compile Include="Data\道具属性类型.cs" />
     <Compile Include="Data\道具类型.cs" />
+    <Compile Include="forDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forDebug.Designer.cs">
+      <DependentUpon>forDebug.cs</DependentUpon>
+    </Compile>
     <Compile Include="parserMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     <Compile Include="SQLiteHelper.cs" />
     <EmbeddedResource Include="beforeRun.resx">
       <DependentUpon>beforeRun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forDebug.resx">
+      <DependentUpon>forDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="parserMain.resx">
       <DependentUpon>parserMain.cs</DependentUpon>

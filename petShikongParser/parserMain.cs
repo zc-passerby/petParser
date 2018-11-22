@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using Newtonsoft.Json.Linq;
 
 namespace petShikongParser
 {
     public partial class parserMain : Form
     {
         public dataProcessor processor = new dataProcessor();   // 数据解析
+
+        public JArray propList = null;
 
         public parserMain(beforeRun bf)
         {
@@ -25,6 +28,11 @@ namespace petShikongParser
         {
             string version = processor.getVersion();
             MessageBox.Show("当前版本号是：" + version);
+        }
+
+        private void btnGetPropData_Click(object sender, EventArgs e)
+        {
+            propList = processor.parsePropDefineData();
         }
 
         /*

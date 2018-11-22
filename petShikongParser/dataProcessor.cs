@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace petShikongParser
 
         private static readonly string taskDefineFile = @"\PageMain\task\_0.task";    // 任务定义文件
 
-        private static readonly string propDefileFile = @"\PageMain\Content\resources\Thumbs.db"; // 道具定义文件
+        private static readonly string propDefineFile = @"\PageMain\Content\resources\Thumbs.db"; // 道具定义文件
 
         private static readonly string propDetailPath = @"\PageMain\propTable";  // 道具详细介绍路径（.data文件）
 
@@ -54,6 +56,30 @@ namespace petShikongParser
 
         private static string archivedFileHash;
 
+        #region 私有方法
+        /// <summary>
+        /// 读取文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private string readFile(string fileName)
+        {
+            if (!File.Exists(fileName))
+                return null;
+            string text = "";
+            using (StreamReader streamReader = new StreamReader(fileName))
+            {
+                string str = "";
+                while ((str = streamReader.ReadLine()) != null)
+                {
+                    text += str;
+                }
+            }
+            return text;
+        }
+        #endregion
+
+        #region 公有方法
         /// <summary>
         /// 设置时空单机的路径
         /// </summary>
@@ -79,18 +105,8 @@ namespace petShikongParser
         /// <returns></returns>
         public string getVersion()
         {
-            if (!File.Exists(archivedFileFull))
-                return null;
-            string text = "";
-            using (StreamReader streamReader = new StreamReader(archivedFileFull))
-            {
-                string str;
-                while ((str = streamReader.ReadLine()) != null)
-                {
-                    text += str;
-                }
-            }
-            if (text == null)
+            string text = readFile(archivedFileFull);
+            if (text == null || text == "")
                 return null;
             string text2 = text;
             string str2 = "";
@@ -116,5 +132,36 @@ namespace petShikongParser
             }
             return RC4.DecryptRC4wq(array2[3], securityKey + str2);
         }
+
+        /// <summary>
+        /// 解析文件，将文件中内容解密后返回
+        /// </summary>
+        /// <param name="fileName">文件名全路径</param>
+        /// <returns></returns>
+        public string parseTargetFile(string fileName)
+        {
+            string text = readFile(fileName);
+            return RC4.DecryptRC4wq(text, securityKey);
+        }
+
+        public JArray parsePropDefineData()
+        {
+            string propDefineFilePath = petShikongPath + propDefineFile;
+            string text = parseTargetFile(propDefineFilePath);
+            JArray propDefineData = JsonConvert.DeserializeObject<JArray>(text);
+            string propDataStr = "";
+            foreach(JObject singleProp in propDefineData)
+            {
+                string propInfo = string.Format("{0},{1},{2},{3}\r\n",
+                    singleProp["道具序号"], singleProp["道具名字"],
+                    singleProp["道具图标"], singleProp["道具价格"]);
+                propDataStr += propInfo;
+            }
+            forDebug fm = new forDebug();
+            fm.setData(propDataStr);
+            fm.ShowDialog();
+            return propDefineData;
+        }
+        #endregion
     }
 }
