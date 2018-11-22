@@ -16,7 +16,12 @@ namespace petShikongParser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new parserMain());
+            beforeRun preview = new beforeRun();
+            preview.ShowDialog();
+            if(preview.bComplete)
+            {
+                Application.Run(new parserMain(preview));
+            }
         }
     }
 }
