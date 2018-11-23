@@ -35,14 +35,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpUserInfo = new System.Windows.Forms.TabPage();
             this.tpUserProp = new System.Windows.Forms.TabPage();
+            this.gbPropDB = new System.Windows.Forms.GroupBox();
+            this.btnInsertPropDB = new System.Windows.Forms.Button();
+            this.btnClearPropDB = new System.Windows.Forms.Button();
+            this.btnGetPropData = new System.Windows.Forms.Button();
+            this.btnOpenPropDB = new System.Windows.Forms.Button();
             this.tpUserEquip = new System.Windows.Forms.TabPage();
             this.tpUserPet = new System.Windows.Forms.TabPage();
             this.tpUserTask = new System.Windows.Forms.TabPage();
-            this.gbPropDB = new System.Windows.Forms.GroupBox();
-            this.btnOpenPropDB = new System.Windows.Forms.Button();
-            this.btnGetPropData = new System.Windows.Forms.Button();
-            this.btnClearPropDB = new System.Windows.Forms.Button();
-            this.btnInsertPropDB = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpUserProp.SuspendLayout();
@@ -107,6 +107,58 @@
             this.tpUserProp.Text = "用户道具";
             this.tpUserProp.UseVisualStyleBackColor = true;
             // 
+            // gbPropDB
+            // 
+            this.gbPropDB.Controls.Add(this.btnInsertPropDB);
+            this.gbPropDB.Controls.Add(this.btnClearPropDB);
+            this.gbPropDB.Controls.Add(this.btnGetPropData);
+            this.gbPropDB.Controls.Add(this.btnOpenPropDB);
+            this.gbPropDB.Location = new System.Drawing.Point(7, 7);
+            this.gbPropDB.Name = "gbPropDB";
+            this.gbPropDB.Size = new System.Drawing.Size(506, 54);
+            this.gbPropDB.TabIndex = 0;
+            this.gbPropDB.TabStop = false;
+            this.gbPropDB.Text = "道具数据库";
+            // 
+            // btnInsertPropDB
+            // 
+            this.btnInsertPropDB.Location = new System.Drawing.Point(425, 20);
+            this.btnInsertPropDB.Name = "btnInsertPropDB";
+            this.btnInsertPropDB.Size = new System.Drawing.Size(75, 23);
+            this.btnInsertPropDB.TabIndex = 3;
+            this.btnInsertPropDB.Text = "写入数据库";
+            this.btnInsertPropDB.UseVisualStyleBackColor = true;
+            this.btnInsertPropDB.Click += new System.EventHandler(this.btnInsertPropDB_Click);
+            // 
+            // btnClearPropDB
+            // 
+            this.btnClearPropDB.Location = new System.Drawing.Point(295, 20);
+            this.btnClearPropDB.Name = "btnClearPropDB";
+            this.btnClearPropDB.Size = new System.Drawing.Size(75, 23);
+            this.btnClearPropDB.TabIndex = 2;
+            this.btnClearPropDB.Text = "清空数据库";
+            this.btnClearPropDB.UseVisualStyleBackColor = true;
+            // 
+            // btnGetPropData
+            // 
+            this.btnGetPropData.Location = new System.Drawing.Point(149, 20);
+            this.btnGetPropData.Name = "btnGetPropData";
+            this.btnGetPropData.Size = new System.Drawing.Size(75, 23);
+            this.btnGetPropData.TabIndex = 1;
+            this.btnGetPropData.Text = "获取数据";
+            this.btnGetPropData.UseVisualStyleBackColor = true;
+            this.btnGetPropData.Click += new System.EventHandler(this.btnGetPropData_Click);
+            // 
+            // btnOpenPropDB
+            // 
+            this.btnOpenPropDB.Location = new System.Drawing.Point(6, 20);
+            this.btnOpenPropDB.Name = "btnOpenPropDB";
+            this.btnOpenPropDB.Size = new System.Drawing.Size(85, 23);
+            this.btnOpenPropDB.TabIndex = 0;
+            this.btnOpenPropDB.Text = "打开数据库";
+            this.btnOpenPropDB.UseVisualStyleBackColor = true;
+            this.btnOpenPropDB.Click += new System.EventHandler(this.btnOpenPropDB_Click);
+            // 
             // tpUserEquip
             // 
             this.tpUserEquip.Location = new System.Drawing.Point(4, 22);
@@ -133,56 +185,6 @@
             this.tpUserTask.TabIndex = 4;
             this.tpUserTask.Text = "用户任务";
             this.tpUserTask.UseVisualStyleBackColor = true;
-            // 
-            // gbPropDB
-            // 
-            this.gbPropDB.Controls.Add(this.btnInsertPropDB);
-            this.gbPropDB.Controls.Add(this.btnClearPropDB);
-            this.gbPropDB.Controls.Add(this.btnGetPropData);
-            this.gbPropDB.Controls.Add(this.btnOpenPropDB);
-            this.gbPropDB.Location = new System.Drawing.Point(7, 7);
-            this.gbPropDB.Name = "gbPropDB";
-            this.gbPropDB.Size = new System.Drawing.Size(506, 54);
-            this.gbPropDB.TabIndex = 0;
-            this.gbPropDB.TabStop = false;
-            this.gbPropDB.Text = "道具数据库";
-            // 
-            // btnOpenPropDB
-            // 
-            this.btnOpenPropDB.Location = new System.Drawing.Point(6, 20);
-            this.btnOpenPropDB.Name = "btnOpenPropDB";
-            this.btnOpenPropDB.Size = new System.Drawing.Size(85, 23);
-            this.btnOpenPropDB.TabIndex = 0;
-            this.btnOpenPropDB.Text = "打开数据库";
-            this.btnOpenPropDB.UseVisualStyleBackColor = true;
-            // 
-            // btnGetPropData
-            // 
-            this.btnGetPropData.Location = new System.Drawing.Point(149, 20);
-            this.btnGetPropData.Name = "btnGetPropData";
-            this.btnGetPropData.Size = new System.Drawing.Size(75, 23);
-            this.btnGetPropData.TabIndex = 1;
-            this.btnGetPropData.Text = "获取数据";
-            this.btnGetPropData.UseVisualStyleBackColor = true;
-            this.btnGetPropData.Click += new System.EventHandler(this.btnGetPropData_Click);
-            // 
-            // btnClearPropDB
-            // 
-            this.btnClearPropDB.Location = new System.Drawing.Point(295, 20);
-            this.btnClearPropDB.Name = "btnClearPropDB";
-            this.btnClearPropDB.Size = new System.Drawing.Size(75, 23);
-            this.btnClearPropDB.TabIndex = 2;
-            this.btnClearPropDB.Text = "清空数据库";
-            this.btnClearPropDB.UseVisualStyleBackColor = true;
-            // 
-            // btnInsertPropDB
-            // 
-            this.btnInsertPropDB.Location = new System.Drawing.Point(425, 20);
-            this.btnInsertPropDB.Name = "btnInsertPropDB";
-            this.btnInsertPropDB.Size = new System.Drawing.Size(75, 23);
-            this.btnInsertPropDB.TabIndex = 3;
-            this.btnInsertPropDB.Text = "写入数据库";
-            this.btnInsertPropDB.UseVisualStyleBackColor = true;
             // 
             // parserMain
             // 

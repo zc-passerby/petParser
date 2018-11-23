@@ -1,6 +1,6 @@
 ﻿namespace petShikongParser
 {
-    partial class forDebug
+    partial class fmShowData
     {
         /// <summary>
         /// Required designer variable.
@@ -38,19 +38,20 @@
             this.tbFroDebug.Name = "tbFroDebug";
             this.tbFroDebug.ReadOnly = true;
             this.tbFroDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbFroDebug.Size = new System.Drawing.Size(586, 326);
+            this.tbFroDebug.Size = new System.Drawing.Size(384, 393);
             this.tbFroDebug.TabIndex = 0;
             // 
             // forDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 350);
+            this.ClientSize = new System.Drawing.Size(408, 417);
             this.Controls.Add(this.tbFroDebug);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "forDebug";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "forDebug";
             this.ResumeLayout(false);
             this.PerformLayout();

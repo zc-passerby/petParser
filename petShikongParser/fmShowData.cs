@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace petShikongParser
 {
-    public partial class forDebug : Form
+    public partial class fmShowData : Form
     {
-        public forDebug()
+        public fmShowData()
         {
             InitializeComponent();
         }

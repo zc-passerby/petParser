@@ -47,4 +47,13 @@ namespace petShikongParser
         Version5 = 1,
         Version6 = 2,
     }
+
+    public enum dbTableOptions
+    {
+        notset = -1,
+        propTable = 0,
+        equipTable = 1,
+        petTable = 2,
+        taskTable = 3
+    }
 }

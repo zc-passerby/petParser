@@ -1,12 +1,16 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Data;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace petShikongParser
 {
@@ -41,6 +45,8 @@ namespace petShikongParser
         private static readonly string equipSuitInfoPath = @"\PageMain\propTable\e\s\";  // 装备套装介绍路径（.dat文件）
 
         private static readonly string taskDetailPath = @"\PageMain\task";   // 任务详细介绍路径（.dat文件）
+
+        private static string dbConnectionString = @"Data Source=Library/petShikongData.db;Version=3;password=";
 
         private static string petShikongPath = "";
 
@@ -144,6 +150,10 @@ namespace petShikongParser
             return RC4.DecryptRC4wq(text, securityKey);
         }
 
+        /// <summary>
+        /// 解析道具定义的数据
+        /// </summary>
+        /// <returns></returns>
         public JArray parsePropDefineData()
         {
             string propDefineFilePath = petShikongPath + propDefineFile;
@@ -157,10 +167,70 @@ namespace petShikongParser
                     singleProp["道具图标"], singleProp["道具价格"]);
                 propDataStr += propInfo;
             }
-            forDebug fm = new forDebug();
-            fm.setData(propDataStr);
-            fm.ShowDialog();
+            fmShowData showData = new fmShowData();
+            showData.setData(propDataStr);
+            showData.ShowDialog();
             return propDefineData;
+        }
+        #endregion
+
+        #region 数据库操作
+        private string getTableNameByType(dbTableOptions enTable)
+        {
+            string tableName = "";
+            switch (enTable)
+            {
+                case dbTableOptions.propTable:
+                    tableName = "propDefine";
+                    break;
+                default:
+                    break;
+            }
+            return tableName;
+        }
+
+        /// <summary>
+        /// 获取表中数据的条数
+        /// </summary>
+        /// <param name="enTable"></param>
+        /// <returns></returns>
+        public int getTableCountFromDb(dbTableOptions enTable)
+        {
+            string tableName = getTableNameByType(enTable);
+            if (tableName == "")
+                return -1;
+            string selectSql = string.Format("select count(0) from {0};", tableName);
+            object[] ob = { };
+            object result = SQLiteHelper.ExecuteScalar(dbConnectionString, selectSql, ob);
+            return int.Parse(result.ToString());
+        }
+
+        /// <summary>
+        /// 插入数据到数据库中
+        /// </summary>
+        /// <param name="tableData"></param>
+        /// <param name="enTable"></param>
+        /// <returns></returns>
+        public int insertDataToDb(JArray tableData, dbTableOptions enTable)
+        {
+            int insertCount = 0;
+            string tableName = getTableNameByType(enTable);
+            if (tableName == "")
+                return -1;
+
+            string insertSql = string.Format("insert into {0} values(@propSeq, @propName, @propIcon, @propPrice);", tableName);
+            List<object[]> paramList = new List<object[]>();
+            foreach(JObject propData in tableData)
+            {
+                object[] objects = new object[4];
+                objects[0] = int.Parse(propData["道具序号"].ToString());
+                objects[1] = propData["道具名字"].ToString();
+                objects[2] = int.Parse(propData["道具图标"].ToString());
+                objects[3] = int.Parse(propData["道具价格"].ToString());
+                paramList.Add(objects);
+            }
+            insertCount = SQLiteHelper.ExecuteNonQueryWithTransaction(dbConnectionString, insertSql, paramList);
+            return insertCount;
         }
         #endregion
     }
