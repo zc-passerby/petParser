@@ -22,6 +22,17 @@ namespace petShikongParser
         private SQLiteHelper()
         {
         }
+
+        /// <summary>
+        /// Creates the command.
+        /// </summary>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>SQLite Command</returns>
+        public static SQLiteCommand CreateCommand(string connectionString)
+        {
+            SQLiteConnection cn = new SQLiteConnection(connectionString);
+            return cn.CreateCommand();
+        }
        
         /// <summary>
         /// Creates the command.
@@ -332,6 +343,34 @@ namespace petShikongParser
             int result = cmd.ExecuteNonQuery();
             cmd.Connection.Close();
             cmd.Dispose();
+            return result;
+        }
+
+        /// <summary>
+        /// 使用事务来进行大量数据的提交
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="commandText"></param>
+        /// <param name="paramList">数据列表</param>
+        /// <returns></returns>
+        public static int ExecuteNonQueryWithTransaction(string connectionString, string commandText, List<object[]> paramList)
+        {
+            int result = 0;
+            SQLiteConnection cn = new SQLiteConnection(connectionString);
+            if (cn.State == ConnectionState.Closed)
+                cn.Open();
+            SQLiteTransaction trans = cn.BeginTransaction();
+            foreach (object[] ob in paramList)
+            {
+                SQLiteCommand cmd = cn.CreateCommand();
+                cmd.CommandText = commandText;
+                AttachParameters(cmd, commandText, ob);
+                result += cmd.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            trans.Commit();
+            cn.Close();
+
             return result;
         }
 
