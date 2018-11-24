@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbFroDebug = new System.Windows.Forms.TextBox();
+            this.tbShowData = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // tbFroDebug
+            // tbShowData
             // 
-            this.tbFroDebug.Location = new System.Drawing.Point(12, 12);
-            this.tbFroDebug.Multiline = true;
-            this.tbFroDebug.Name = "tbFroDebug";
-            this.tbFroDebug.ReadOnly = true;
-            this.tbFroDebug.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbFroDebug.Size = new System.Drawing.Size(384, 393);
-            this.tbFroDebug.TabIndex = 0;
+            this.tbShowData.Location = new System.Drawing.Point(12, 12);
+            this.tbShowData.Multiline = true;
+            this.tbShowData.Name = "tbShowData";
+            this.tbShowData.ReadOnly = true;
+            this.tbShowData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbShowData.Size = new System.Drawing.Size(384, 393);
+            this.tbShowData.TabIndex = 0;
             // 
-            // forDebug
+            // fmShowData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 417);
-            this.Controls.Add(this.tbFroDebug);
+            this.Controls.Add(this.tbShowData);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "forDebug";
+            this.Name = "fmShowData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "forDebug";
+            this.Text = "ForDebug";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -60,6 +60,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbFroDebug;
+        private System.Windows.Forms.TextBox tbShowData;
     }
 }

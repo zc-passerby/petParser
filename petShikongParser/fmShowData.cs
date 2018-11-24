@@ -12,14 +12,18 @@ namespace petShikongParser
 {
     public partial class fmShowData : Form
     {
-        public fmShowData()
+        public fmShowData(showDataFormParam param)
         {
             InitializeComponent();
+            Text = param.formText;
+            tbShowData.Text = param.tbShowDataText;
         }
+    }
 
-        public void setData(string text)
-        {
-            tbFroDebug.Text = text;
-        }
+    public class showDataFormParam
+    {
+        public string formText { get; set; }
+
+        public string tbShowDataText { get; set; }
     }
 }

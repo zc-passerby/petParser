@@ -39,7 +39,7 @@
             this.tbSetDir.Name = "tbSetDir";
             this.tbSetDir.Size = new System.Drawing.Size(267, 21);
             this.tbSetDir.TabIndex = 0;
-            this.tbSetDir.Text = "F:\\个人文件夹\\口袋单机\\口袋时空单机9.2.5.4[精简版]";
+            this.tbSetDir.Text = "E:\\vsProject\\口袋时空单机9.2.5.4[精简版]";
             // 
             // btnSetDir
             // 

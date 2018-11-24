@@ -138,6 +138,7 @@
             this.btnClearPropDB.TabIndex = 2;
             this.btnClearPropDB.Text = "清空数据库";
             this.btnClearPropDB.UseVisualStyleBackColor = true;
+            this.btnClearPropDB.Click += new System.EventHandler(this.btnClearPropDB_Click);
             // 
             // btnGetPropData
             // 

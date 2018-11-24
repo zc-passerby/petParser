@@ -50,10 +50,12 @@ namespace petShikongParser
 
     public enum dbTableOptions
     {
-        notset = -1,
-        propTable = 0,
-        equipTable = 1,
-        petTable = 2,
-        taskTable = 3
+        notset,
+        propDataView,
+        propDefineTable,
+        propDetailTable,
+        equipTable,
+        petTable,
+        taskTable
     }
 }
