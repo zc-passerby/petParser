@@ -41,7 +41,12 @@ namespace petShikongParser
 
         private void btnOpenPropDB_Click(object sender, EventArgs e)
         {
-
+            DataSet result = processor.getDataFromDB(dbTableOptions.propDataView, "propSeq, propName, propIntro");
+            showDBDataFormParam fmShowParam = new showDBDataFormParam();
+            fmShowParam.formText = "道具信息数据";
+            fmShowParam.dgvShowDataSrc = result;
+            fmShowDBData fmShow = new fmShowDBData(fmShowParam);
+            fmShow.ShowDialog();
         }
 
         private void btnInsertPropDB_Click(object sender, EventArgs e)
@@ -61,7 +66,7 @@ namespace petShikongParser
             }
             int insertCount = processor.insertPropDefineDataToDb(propList, dbTableOptions.propDefineTable);
             string strMsg = string.Format("插入道具定义数据：{0}条\r\n", insertCount);
-            insertCount = processor.insertPropDetailDataToDb(propDetailList, dbTableOptions.propDetailTable);
+            insertCount = processor.insertPropDetailDataToDB(propDetailList, dbTableOptions.propDetailTable);
             strMsg += string.Format("插入道具说明数据：{0}条", insertCount);
             MessageBox.Show(strMsg);
         }

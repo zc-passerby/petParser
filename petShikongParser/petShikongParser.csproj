@@ -112,6 +112,12 @@
     <Compile Include="fmShowData.Designer.cs">
       <DependentUpon>fmShowData.cs</DependentUpon>
     </Compile>
+    <Compile Include="fmShowDBData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmShowDBData.Designer.cs">
+      <DependentUpon>fmShowDBData.cs</DependentUpon>
+    </Compile>
     <Compile Include="parserMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fmShowData.resx">
       <DependentUpon>fmShowData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fmShowDBData.resx">
+      <DependentUpon>fmShowDBData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="parserMain.resx">
       <DependentUpon>parserMain.cs</DependentUpon>

@@ -217,6 +217,9 @@ namespace petShikongParser
                 case dbTableOptions.propDetailTable:
                     tableName = "propDetail";
                     break;
+                case dbTableOptions.propDataView:
+                    tableName = "v_propData";
+                    break;
                 default:
                     break;
             }
@@ -267,7 +270,13 @@ namespace petShikongParser
             return insertCount;
         }
 
-        public int insertPropDetailDataToDb(JArray tableData, dbTableOptions enTable)
+        /// <summary>
+        /// 插入道具说明数据到数据库中
+        /// </summary>
+        /// <param name="tableData"></param>
+        /// <param name="enTable"></param>
+        /// <returns></returns>
+        public int insertPropDetailDataToDB(JArray tableData, dbTableOptions enTable)
         {
             int insertCount = 0;
             string tableName = getTableNameByType(enTable);
@@ -301,6 +310,70 @@ namespace petShikongParser
             string deleteSql = string.Format("delete from {0};", tableName);
             object[] param = { };
             return SQLiteHelper.ExecuteNonQuery(dbConnectionString, deleteSql, param);
+        }
+
+        /// <summary>
+        /// 获取某个表的全部字段的全部数据
+        /// </summary>
+        /// <param name="enTable"></param>
+        /// <returns></returns>
+        public DataSet getDataFromDB(dbTableOptions enTable)
+        {
+            string tableName = getTableNameByType(enTable);
+            if (tableName == "")
+                return null;
+            string selectSql = string.Format("select * from {0};", tableName);
+            SQLiteParameter[] paramList = { };
+            return SQLiteHelper.ExecuteDataSet(dbConnectionString, selectSql, paramList);
+        }
+
+        /// <summary>
+        /// 获取某个表的指定字段的全部数据
+        /// </summary>
+        /// <param name="enTable"></param>
+        /// <param name="tableField">需要获取的字段，以','分隔</param>
+        /// <returns></returns>
+        public DataSet getDataFromDB(dbTableOptions enTable, string tableField)
+        {
+            string tableName = getTableNameByType(enTable);
+            if (tableName == "")
+                return null;
+            string selectSql = string.Format("select {0} from {1};", tableField, tableName);
+            SQLiteParameter[] paramList = { };
+            return SQLiteHelper.ExecuteDataSet(dbConnectionString, selectSql, paramList);
+        }
+
+        /// <summary>
+        /// 获取某个表的全部字段的部分数据
+        /// </summary>
+        /// <param name="enTable"></param>
+        /// <param name="whereClause">查询条件，可使用"@param"格式</param>
+        /// <param name="paramList">无"@param"时，此字段传入{}，使用"@param"格式时，传入参数列表</param>
+        /// <returns></returns>
+        public DataSet getDataFromDB(dbTableOptions enTable, string whereClause, SQLiteParameter[] paramList)
+        {
+            string tableName = getTableNameByType(enTable);
+            if (tableName == "")
+                return null;
+            string selectSql = string.Format("select * from {0} where {1};", tableName, whereClause);
+            return SQLiteHelper.ExecuteDataSet(dbConnectionString, selectSql, paramList);
+        }
+
+        /// <summary>
+        /// 获取某个表的指定字段的部分数据
+        /// </summary>
+        /// <param name="enTable"></param>
+        /// <param name="tableField">需要获取的字段，以','分隔</param>
+        /// <param name="whereClause">查询条件，可使用"@param"格式</param>
+        /// <param name="paramList">无"@param"时，此字段传入{}，使用"@param"格式时，传入参数列表</param>
+        /// <returns></returns>
+        public DataSet getDataFromDB(dbTableOptions enTable, string tableField, string whereClause, SQLiteParameter[] paramList)
+        {
+            string tableName = getTableNameByType(enTable);
+            if (tableName == "")
+                return null;
+            string selectSql = string.Format("select {0} from {1} where {2};", tableField, tableName, whereClause);
+            return SQLiteHelper.ExecuteDataSet(dbConnectionString, selectSql, paramList);
         }
         #endregion
     }
